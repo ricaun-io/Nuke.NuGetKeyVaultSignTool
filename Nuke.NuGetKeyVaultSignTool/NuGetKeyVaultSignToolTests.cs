@@ -50,7 +50,7 @@ namespace NuGetKeyVaultSignTool
             Console.WriteLine(NuGetKeyVaultSignToolTasks.NuGetKeyVaultSignToolPath);
         }
 
-        [TestCase("file.nupkg")]
+        [TestCase("Files/package.nupkg")]
         public void SignPackage(string fileName)
         {
             if (string.IsNullOrEmpty(AZURE_KEY_VAULT_FILE))
