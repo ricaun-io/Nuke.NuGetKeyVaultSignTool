@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Newtonsoft.Json;
 
-namespace NuGetKeyVaultSignTool
+namespace Nuke.NuGetKeyVaultSignTool
 {
     public class AzureKeyVaultConfigTests
     {

@@ -10,7 +10,7 @@ using System;
 using Nuke.Common.Tooling;
 using System.Collections.Generic;
 
-namespace NuGetKeyVaultSignTool
+namespace Nuke.NuGetKeyVaultSignTool
 {
     public class NuGetKeyVaultSignToolTests
     {

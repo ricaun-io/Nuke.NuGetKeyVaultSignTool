@@ -20,7 +20,7 @@
     <None Include=".nuke\*" />
   </ItemGroup>
 
-  <!--<ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Nuke.NuGetKeyVaultSignTool\Nuke.NuGetKeyVaultSignTool.csproj" />
   </ItemGroup>
 
@@ -32,6 +32,6 @@
   
   <PropertyGroup>
     <NoWarn>$(NoWarn);NU1505</NoWarn>
-  </PropertyGroup>-->
+  </PropertyGroup>
   
 </Project>

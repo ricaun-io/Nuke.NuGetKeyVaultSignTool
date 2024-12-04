@@ -29,6 +29,7 @@
         "Compile",
         "GenerateTools",
         "GitRelease",
+        "NuGetKeyVaultSign",
         "Release",
         "Sign",
         "Test"

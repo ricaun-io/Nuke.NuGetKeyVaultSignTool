@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using static Nuke.CodeGeneration.CodeGenerator;
 
-namespace NuGetKeyVaultSignTool
+namespace Nuke.NuGetKeyVaultSignTool
 {
     public class GenerationToolsTests
     {

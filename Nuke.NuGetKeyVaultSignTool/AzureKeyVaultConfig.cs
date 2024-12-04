@@ -1,4 +1,4 @@
-﻿namespace NuGetKeyVaultSignTool
+﻿namespace Nuke.NuGetKeyVaultSignTool
 {
     public class AzureKeyVaultConfig
     {
