@@ -19,7 +19,7 @@ The [GenerationToolsTests.cs](Nuke.NuGetKeyVaultSignTool/GenerationToolsTests.cs
 
 The `NuGetKeyVaultSignTool.Generated.cs` file contain the `NuGetKeyVaultSignToolTasks` class with the following tasks:
 
-```
+```C#
 NuGetKeyVaultSignToolTasks.NuGetKeyVaultSignTool(x => x
     .SetFile(fileName)
     .SetKeyVaultCertificateName(azureKeyVaultCertificate)
@@ -47,7 +47,7 @@ To use the `NuGetKeyVaultSignToolTasks` inside a nuke project you need to instal
 
 To unit test the `NuGetKeyVaultSignToolTasks` still need to install the `PackageDownload` in the project, but is necessary to setup a environment variable to be able to find the `NuGetKeyVaultSignToolTasks.NuGetKeyVaultSignToolPath`.
 
-```
+```C#
 string userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 string nuGetKeyVaultSignToolPath = Path.Combine(userFolder, ".nuget\\packages\\nugetkeyvaultsigntool\\3.2.3\\tools\\net6.0\\any\\NuGetKeyVaultSignTool.dll");
 Environment.SetEnvironmentVariable("NUGETKEYVAULTSIGNTOOL_EXE", nuGetKeyVaultSignToolPath);
