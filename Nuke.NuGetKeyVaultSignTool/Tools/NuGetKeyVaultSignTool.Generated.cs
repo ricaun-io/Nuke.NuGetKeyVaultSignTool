@@ -17,7 +17,7 @@ using System.Text;
 namespace Nuke.Common.Tools.NuGetKeyVaultSignTool;
 
 /// <summary>
-///   <p>Azure Sign Tool is similar to <c>signtool</c> in the Windows SDK, with the major difference being that it uses Azure Key Vault for performing the signing process. The usage is like <c>signtool</c>, except with a limited set of options for signing and options for authenticating to Azure Key Vault.</p>
+///   <p>NuGet Key Vault Sign Tool is similar to <c>nuget sign</c>, with the major difference being that it uses Azure Key Vault for performing the signing process. Similar usage configuration like <c>AzureSignTool</c>, except is used to sign nuget package.</p>
 ///   <p>For more details, visit the <a href="https://github.com/novotnyllc/NuGetKeyVaultSignTool">official website</a>.</p>
 /// </summary>
 [PublicAPI]
@@ -36,7 +36,7 @@ public partial class NuGetKeyVaultSignToolTasks
     public static Action<OutputType, string> NuGetKeyVaultSignToolLogger { get; set; } = ProcessTasks.DefaultLogger;
     public static Action<ToolSettings, IProcess> NuGetKeyVaultSignToolExitHandler { get; set; } = ProcessTasks.DefaultExitHandler;
     /// <summary>
-    ///   <p>Azure Sign Tool is similar to <c>signtool</c> in the Windows SDK, with the major difference being that it uses Azure Key Vault for performing the signing process. The usage is like <c>signtool</c>, except with a limited set of options for signing and options for authenticating to Azure Key Vault.</p>
+    ///   <p>NuGet Key Vault Sign Tool is similar to <c>nuget sign</c>, with the major difference being that it uses Azure Key Vault for performing the signing process. Similar usage configuration like <c>AzureSignTool</c>, except is used to sign nuget package.</p>
     ///   <p>For more details, visit the <a href="https://github.com/novotnyllc/NuGetKeyVaultSignTool">official website</a>.</p>
     /// </summary>
     public static IReadOnlyCollection<Output> NuGetKeyVaultSignTool(ArgumentStringHandler arguments, string workingDirectory = null, IReadOnlyDictionary<string, string> environmentVariables = null, int? timeout = null, bool? logOutput = null, bool? logInvocation = null, Action<OutputType, string> logger = null, Action<IProcess> exitHandler = null)
@@ -46,7 +46,7 @@ public partial class NuGetKeyVaultSignToolTasks
         return process.Output;
     }
     /// <summary>
-    ///   <p>Azure Sign Tool is similar to <c>signtool</c> in the Windows SDK, with the major difference being that it uses Azure Key Vault for performing the signing process. The usage is like <c>signtool</c>, except with a limited set of options for signing and options for authenticating to Azure Key Vault.</p>
+    ///   <p>NuGet Key Vault Sign Tool is similar to <c>nuget sign</c>, with the major difference being that it uses Azure Key Vault for performing the signing process. Similar usage configuration like <c>AzureSignTool</c>, except is used to sign nuget package.</p>
     ///   <p>For more details, visit the <a href="https://github.com/novotnyllc/NuGetKeyVaultSignTool">official website</a>.</p>
     /// </summary>
     /// <remarks>
@@ -75,7 +75,7 @@ public partial class NuGetKeyVaultSignToolTasks
         return process.Output;
     }
     /// <summary>
-    ///   <p>Azure Sign Tool is similar to <c>signtool</c> in the Windows SDK, with the major difference being that it uses Azure Key Vault for performing the signing process. The usage is like <c>signtool</c>, except with a limited set of options for signing and options for authenticating to Azure Key Vault.</p>
+    ///   <p>NuGet Key Vault Sign Tool is similar to <c>nuget sign</c>, with the major difference being that it uses Azure Key Vault for performing the signing process. Similar usage configuration like <c>AzureSignTool</c>, except is used to sign nuget package.</p>
     ///   <p>For more details, visit the <a href="https://github.com/novotnyllc/NuGetKeyVaultSignTool">official website</a>.</p>
     /// </summary>
     /// <remarks>
@@ -101,7 +101,7 @@ public partial class NuGetKeyVaultSignToolTasks
         return NuGetKeyVaultSignTool(configurator(new NuGetKeyVaultSignToolSettings()));
     }
     /// <summary>
-    ///   <p>Azure Sign Tool is similar to <c>signtool</c> in the Windows SDK, with the major difference being that it uses Azure Key Vault for performing the signing process. The usage is like <c>signtool</c>, except with a limited set of options for signing and options for authenticating to Azure Key Vault.</p>
+    ///   <p>NuGet Key Vault Sign Tool is similar to <c>nuget sign</c>, with the major difference being that it uses Azure Key Vault for performing the signing process. Similar usage configuration like <c>AzureSignTool</c>, except is used to sign nuget package.</p>
     ///   <p>For more details, visit the <a href="https://github.com/novotnyllc/NuGetKeyVaultSignTool">official website</a>.</p>
     /// </summary>
     /// <remarks>

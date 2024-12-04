@@ -27,6 +27,7 @@
         "Build",
         "Clean",
         "Compile",
+        "GenerateTools",
         "GitRelease",
         "Release",
         "Sign",
