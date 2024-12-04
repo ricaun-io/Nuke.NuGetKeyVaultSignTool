@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/nuke-build/nuke/master/source/Nuke.Tooling.Generator/schema.json",
   "name": "NuGetKeyVaultSignTool",
   "officialUrl": "https://github.com/novotnyllc/NuGetKeyVaultSignTool",
-  "help": "Azure Sign Tool is similar to <c>signtool</c> in the Windows SDK, with the major difference being that it uses Azure Key Vault for performing the signing process. The usage is like <c>signtool</c>, except with a limited set of options for signing and options for authenticating to Azure Key Vault.",
+  "help": "NuGet Key Vault Sign Tool is similar to <c>nuget sign</c>, with the major difference being that it uses Azure Key Vault for performing the signing process. Similar usage configuration like <c>AzureSignTool</c>, except is used to sign nuget package.",
   "nugetPackageId": "NuGetKeyVaultSignTool",
   "packageExecutable": "NuGetKeyVaultSignTool.dll",
   "tasks": [
