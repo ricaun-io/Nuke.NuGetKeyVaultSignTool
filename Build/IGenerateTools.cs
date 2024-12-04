@@ -16,7 +16,6 @@ public interface IGenerateTools : IClean, ICompile, IHazMainProject, IHazGitRepo
         {
             SpecificationsDirectory.GlobFiles("*.json").ForEach(x =>
             {
-                Serilog.Log.Information($"GenerateCode: {x.Name}");
                 GenerateCode(
                     x,
                     namespaceProvider: x => $"Nuke.Common.Tools.{x.Name}",
