@@ -53,6 +53,31 @@ string nuGetKeyVaultSignToolPath = Path.Combine(userFolder, ".nuget\\packages\\n
 Environment.SetEnvironmentVariable("NUGETKEYVAULTSIGNTOOL_EXE", nuGetKeyVaultSignToolPath);
 ```
 
+## AzureKeyVaultConfig
+
+To simplify the configuration to sign with `Azure Key Vault` two environment variables are used `AZURE_KEY_VAULT_FILE` and `AZURE_KEY_VAULT_PASSWORD`.
+
+### AZURE_KEY_VAULT_FILE
+
+The `AZURE_KEY_VAULT_FILE` is a `json` with the base configuration of the certificated in the `Azure Key Vault`:
+
+```json
+{
+    "AzureKeyVaultCertificate": "AzureKeyVaultCertificate",
+    "AzureKeyVaultUrl": "AzureKeyVaultUrl",
+    "AzureKeyVaultClientId": "AzureKeyVaultClientId",
+    "AzureKeyVaultTenantId": "AzureKeyVaultTenantId",
+    "TimestampUrl" : "http://timestamp.digicert.com"
+    "TimestampDigest" : "sha256"
+}
+```
+
+The `TimestampUrl` and `TimestampDigest` are optional.
+
+### AZURE_KEY_VAULT_PASSWORD
+
+The `AZURE_KEY_VAULT_PASSWORD` is the `AzureKeyVaultClientSecret` of the certificate.
+
 ## License
 
 This package is [licensed](LICENSE) under the [MIT License](https://en.wikipedia.org/wiki/MIT_License).

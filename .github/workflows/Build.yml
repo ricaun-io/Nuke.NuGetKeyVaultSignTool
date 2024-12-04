@@ -22,3 +22,9 @@ jobs:
         run: ./Build/build.cmd --root ./Build
         env:
           GitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+          SignFile: ${{ secrets.SIGN_FILE }}
+          SignPassword: ${{ secrets.SIGN_PASSWORD }}
+
+          AZURE_KEY_VAULT_FILE: ${{ secrets.AZURE_KEY_VAULT_FILE }}
+          AZURE_KEY_VAULT_PASSWORD: ${{ secrets.AZURE_KEY_VAULT_PASSWORD }}
