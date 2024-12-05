@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Files\assembly.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\package.nupkg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
