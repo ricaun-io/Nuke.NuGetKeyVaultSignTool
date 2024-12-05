@@ -83,6 +83,13 @@ namespace Nuke.NuGetKeyVaultSignTool
             Console.WriteLine($"{fileName} - {fileLengthSigned} {fileLength}");
 
             Assert.Greater(fileLengthSigned, fileLength);
+
+            Console.WriteLine(GetSignedFileSubject(fileName));
+        }
+
+        private string GetSignedFileSubject(string fileName)
+        {
+            return System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromSignedFile(fileName).Subject;
         }
     }
 }
