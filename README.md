@@ -5,7 +5,9 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Build](../../actions/workflows/Build.yml/badge.svg)](../../actions)
 
-Nuke Tool Generator for [NuGetKeyVaultSignTool](https://github.com/novotnyllc/NuGetKeyVaultSignTool).
+Nuke Tool Generator for [NuGetKeyVaultSignTool](https://github.com/novotnyllc/NuGetKeyVaultSignTool). 
+
+**The `NuGetKeyVaultSignTool` was add to the [Nuke release 9.0.3](https://github.com/nuke-build/nuke/releases/tag/9.0.3).**
 
 ## Tool CodeGenerator
 
