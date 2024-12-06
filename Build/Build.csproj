@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ricaun.Nuke" Version="*" />
+    <PackageReference Include="ricaun.Nuke" Version="*-*" />
     <PackageReference Include="Nuke.Tooling.Generator" Version="8.*" />
   </ItemGroup>
 
@@ -24,7 +24,7 @@
     <ProjectReference Include="..\Nuke.NuGetKeyVaultSignTool\Nuke.NuGetKeyVaultSignTool.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <PackageDownload Include="AzureSignTool" Version="[6.0.0]" />
     <PackageDownload Include="AzureSignTool" Version="[5.0.0]" />
     <PackageDownload Include="NuGetKeyVaultSignTool" Version="[3.2.3]" />
@@ -32,6 +32,6 @@
   
   <PropertyGroup>
     <NoWarn>$(NoWarn);NU1505</NoWarn>
-  </PropertyGroup>
+  </PropertyGroup>-->
   
 </Project>
