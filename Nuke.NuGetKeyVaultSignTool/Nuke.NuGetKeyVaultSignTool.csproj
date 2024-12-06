@@ -21,6 +21,9 @@
     <None Update="Files\assembly.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Files\install.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Files\package.nupkg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

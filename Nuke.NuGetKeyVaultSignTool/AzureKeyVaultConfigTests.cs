@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using Newtonsoft.Json;
 
 namespace Nuke.NuGetKeyVaultSignTool
 {
@@ -17,9 +16,18 @@ namespace Nuke.NuGetKeyVaultSignTool
             }
             """;
 
-            var azureKeyVaultFile = JsonConvert.DeserializeObject<AzureKeyVaultConfig>(content);
+            var azureKeyVaultFile = AzureKeyVaultConfig.Create(content);
             Assert.IsNotNull(azureKeyVaultFile);
             Assert.IsFalse(azureKeyVaultFile.IsValid());
+        }
+
+        [Test]
+        public void JsonIsNullTest()
+        {
+            var content = "";
+
+            var azureKeyVaultFile = AzureKeyVaultConfig.Create(content);
+            Assert.IsNull(azureKeyVaultFile);
         }
 
         [Test]
@@ -34,7 +42,7 @@ namespace Nuke.NuGetKeyVaultSignTool
             }
             """;
 
-            var azureKeyVaultFile = JsonConvert.DeserializeObject<AzureKeyVaultConfig>(content);
+            var azureKeyVaultFile = AzureKeyVaultConfig.Create(content);
             Assert.IsNotNull(azureKeyVaultFile);
             Assert.IsTrue(azureKeyVaultFile.IsValid());
             Assert.AreEqual("AzureKeyVaultCertificate", azureKeyVaultFile.AzureKeyVaultCertificate);

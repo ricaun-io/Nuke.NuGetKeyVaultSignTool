@@ -20,6 +20,10 @@ public interface INuGetKeyVaultSign : IClean, ICompile
         .Before(Compile)
         .Executes(() =>
         {
+            new AzureSignToolTests().SetupEnvironmentToolPath();
+            Serilog.Log.Information(AzureSignToolTasks.AzureSignToolPath);
+
+            new NuGetKeyVaultSignToolTests().SetupEnvironmentToolPath();
             Serilog.Log.Information(NuGetKeyVaultSignToolTasks.NuGetKeyVaultSignToolPath);
 
             if (string.IsNullOrEmpty(AZURE_KEY_VAULT_FILE))
@@ -34,7 +38,7 @@ public interface INuGetKeyVaultSign : IClean, ICompile
                 return;
             }
 
-            var azureKeyVaultFile = JsonConvert.DeserializeObject<AzureKeyVaultConfig>(AZURE_KEY_VAULT_FILE);
+            var azureKeyVaultFile = AzureKeyVaultConfig.Create(AZURE_KEY_VAULT_FILE);
             var azureKeyVaultClientSecret = AZURE_KEY_VAULT_PASSWORD;
 
             if (azureKeyVaultFile is null)

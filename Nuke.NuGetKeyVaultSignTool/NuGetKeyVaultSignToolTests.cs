@@ -59,7 +59,7 @@ namespace Nuke.NuGetKeyVaultSignTool
             if (string.IsNullOrEmpty(AZURE_KEY_VAULT_PASSWORD))
                 Assert.Ignore("AZURE_KEY_VAULT_PASSWORD is null.");
 
-            var azureKeyVaultFile = JsonConvert.DeserializeObject<AzureKeyVaultConfig>(AZURE_KEY_VAULT_FILE);
+            var azureKeyVaultFile = AzureKeyVaultConfig.Create(AZURE_KEY_VAULT_FILE);
             var azureKeyVaultClientSecret = AZURE_KEY_VAULT_PASSWORD;
 
             if (azureKeyVaultFile.IsValid() == false)
