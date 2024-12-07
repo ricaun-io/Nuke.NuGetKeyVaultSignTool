@@ -9,21 +9,56 @@ using System.Reflection;
 using Nuke.Common.Tools.NuGetKeyVaultSignTool;
 using Nuke.NuGetKeyVaultSignTool;
 using System.Linq;
+using Nuke.Common.Tools.NuGet;
+using Nuke.Common.Tools.DotNet;
 
 public interface INuGetKeyVaultSign : IClean, ICompile
 {
     private static string AZURE_KEY_VAULT_FILE => Environment.GetEnvironmentVariable("AZURE_KEY_VAULT_FILE");
     private static string AZURE_KEY_VAULT_PASSWORD => Environment.GetEnvironmentVariable("AZURE_KEY_VAULT_PASSWORD");
 
+    private static AbsolutePath GetToolInstallationPath()
+    {
+        AbsolutePath folder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        return folder / "Tools";
+    }
+
+    private static string PackageDownload(string packageId)
+    {
+        var toolFolder = GetToolInstallationPath();
+
+        if (Globbing.GlobFiles(toolFolder, $"{packageId}.exe").FirstOrDefault() is AbsolutePath packageToolExeExists)
+        {
+            Serilog.Log.Information("AzureSignTool");
+            return packageToolExeExists;
+        }
+
+        DotNetTasks.DotNetToolInstall(x => x
+            .SetPackageName(packageId)
+            .SetToolInstallationPath(toolFolder)
+        );
+
+        if (Globbing.GlobFiles(toolFolder, $"{packageId}.exe").FirstOrDefault() is AbsolutePath packageToolExe)
+        {
+            return packageToolExe;
+        }
+        return null;
+    }
+
     Target NuGetKeyVaultSign => _ => _
         .TriggeredBy(Clean)
         .Before(Compile)
         .Executes(() =>
         {
-            new AzureSignToolTests().SetupEnvironmentToolPath();
-            Serilog.Log.Information(AzureSignToolTasks.AzureSignToolPath);
+            Serilog.Log.Information("NuGetKeyVaultSign");
 
-            new NuGetKeyVaultSignToolTests().SetupEnvironmentToolPath();
+            //new AzureSignToolTests().SetupEnvironmentToolPath();
+            //new NuGetKeyVaultSignToolTests().SetupEnvironmentToolPath();
+
+            ricaun.Nuke.Tools.AzureSignToolUtils.DownloadAzureSignTool();
+            ricaun.Nuke.Tools.AzureSignToolUtils.DownloadNuGetKeyVaultSignTool();
+
+            Serilog.Log.Information(AzureSignToolTasks.AzureSignToolPath);
             Serilog.Log.Information(NuGetKeyVaultSignToolTasks.NuGetKeyVaultSignToolPath);
 
             if (string.IsNullOrEmpty(AZURE_KEY_VAULT_FILE))
@@ -82,6 +117,12 @@ public interface INuGetKeyVaultSign : IClean, ICompile
 
             var lengthAfter = (double)new System.IO.FileInfo(fullPath).Length;
 
+            Serilog.Log.Warning($"Sign package {fullPath.Name} - {lengthAfter} {length}");
+
+            fullPath = fileNameToSign.Copy(rootAssembly / "package-ricaun.nupkg", ExistsPolicy.FileOverwrite);
+            length = (double)new System.IO.FileInfo(fullPath).Length;
+            ricaun.Nuke.Tools.AzureSignToolUtils.Sign(fullPath, ricaun.Nuke.Tools.AzureKeyVaultConfig.Create(AZURE_KEY_VAULT_FILE), AZURE_KEY_VAULT_PASSWORD);
+            lengthAfter = (double)new System.IO.FileInfo(fullPath).Length;
             Serilog.Log.Warning($"Sign package {fullPath.Name} - {lengthAfter} {length}");
         });
 }

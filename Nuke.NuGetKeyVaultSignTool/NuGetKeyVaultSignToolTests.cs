@@ -25,11 +25,13 @@ namespace Nuke.NuGetKeyVaultSignTool
         [OneTimeSetUp]
         public void SetupEnvironmentToolPath()
         {
-            var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            foreach (var item in EnvironmentToolPath)
-            {
-                Environment.SetEnvironmentVariable(item.Key, Path.Combine(userFolder, item.Value));
-            }
+            //var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            //foreach (var item in EnvironmentToolPath)
+            //{
+            //    Environment.SetEnvironmentVariable(item.Key, Path.Combine(userFolder, item.Value));
+            //}
+            var packageId = NuGetKeyVaultSignToolTasks.NuGetKeyVaultSignToolPackageId;
+            Environment.SetEnvironmentVariable(packageId.ToUpper() + "_EXE", PackageDownloadUtils.PackageDownload(packageId));
         }
 
         public static void DefaultConsole(OutputType type, string output)

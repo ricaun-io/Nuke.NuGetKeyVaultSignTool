@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Test `NuGetKeyVaultSignTool` in a package.
 - Test `AzureSignTool` in a assembly file, show subject with `GetSignedFileSubject`.
 - Test `AzureSignTool` in a install.exe file.
+- Add `PackageDownloadUtils` to force download tool package in local tool folder.
 
 [vNext]: ../../compare/1.0.0...HEAD
 [1.0.0]: ../../compare/1.0.0
