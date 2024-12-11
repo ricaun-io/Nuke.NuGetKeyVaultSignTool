@@ -24,12 +24,12 @@
     "ExecutableTarget": {
       "type": "string",
       "enum": [
+        "AzureSignTool",
         "Build",
         "Clean",
         "Compile",
         "GenerateTools",
         "GitRelease",
-        "NuGetKeyVaultSign",
         "Release",
         "Sign",
         "Test"
