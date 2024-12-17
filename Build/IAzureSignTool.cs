@@ -13,7 +13,7 @@ public interface IAzureSignTool : IClean, ICompile
         .Before(Compile)
         //.Requires<NuGetKeyVaultSignToolTasks>()
         //.Requires<AzureSignToolTasks>()
-        .Requires<ILRepackTasks>()
+        //.Requires<ILRepackTasks>()
         .Executes(() =>
         {
             Serilog.Log.Information(AzureSignToolTasks.AzureSignToolPath);
