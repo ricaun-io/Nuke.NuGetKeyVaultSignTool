@@ -16,6 +16,7 @@ public interface IAzureSignTool : IClean, ICompile
         //.Requires<ILRepackTasks>()
         .Executes(() =>
         {
+            AzureSignToolUtils.EnsureAzureToolIsInstalled();
             Serilog.Log.Information(AzureSignToolTasks.AzureSignToolPath);
             Serilog.Log.Information(NuGetKeyVaultSignToolTasks.NuGetKeyVaultSignToolPath);
         });

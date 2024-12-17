@@ -1,3 +1,4 @@
+// Generated from https://github.com/ricaun-io/Nuke.NuGetKeyVaultSignTool/blob/develop/Nuke.NuGetKeyVaultSignTool/Tools/NuGetKeyVaultSignTool.json
 
 using JetBrains.Annotations;
 using Newtonsoft.Json;
