@@ -18,7 +18,7 @@ public interface IGenerateTools : IClean, ICompile, IHazMainProject, IHazGitRepo
             {
                 GenerateCode(
                     x,
-                    namespaceProvider: x => $"Nuke.Common.Tools.{x.Name}",
+                    namespaceProvider: x => $"Nuke.Local.Tools.{x.Name}",
                     sourceFileProvider: x => GitRepository.GetGitHubBrowseUrl(x.SpecificationFile)
                 );
             });

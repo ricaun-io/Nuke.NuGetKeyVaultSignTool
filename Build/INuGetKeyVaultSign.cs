@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Nuke.Common.IO;
 using System.IO;
 using System.Reflection;
-using Nuke.Common.Tools.NuGetKeyVaultSignTool;
+using Nuke.Local.Tools.NuGetKeyVaultSignTool;
 using Nuke.NuGetKeyVaultSignTool;
 using System.Linq;
 using Nuke.Common.Tools.NuGet;

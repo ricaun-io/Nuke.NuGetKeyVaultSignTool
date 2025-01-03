@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] / 2025-01-03
+### Tests
+- Add `NuGet` with `delete`, `verify` and `sign` commands.
+- Update namespace to `Nuke.Local.Tools` to prevent conflicts with `Nuke.Common` namespace.
+
 ## [1.0.0] / 2024-12-04
 ### Build
 - Add `INuGetKeyVaultSign` to test `NuGetKeyVaultSignTool` inside nuke project using `AzureKeyVaultConfig`.
@@ -18,4 +23,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `PackageDownloadUtils` to force download tool package in local tool folder.
 
 [vNext]: ../../compare/1.0.0...HEAD
+[1.1.0]: ../../compare/1.0.0...1.1.0
 [1.0.0]: ../../compare/1.0.0

@@ -11,7 +11,7 @@ namespace Nuke.NuGetKeyVaultSignTool
 {
     public class GenerationToolsTests
     {
-        const string namespaceProvider = "Nuke.Common.Tools.{0}";
+        const string namespaceProvider = "Nuke.Local.Tools.{0}";
         private static string ToolsDirectory => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "..", "..", "Tools");
         private static string[] GetToolsFiles()
         {

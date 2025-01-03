@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.IO;
 using System.Reflection;
-using Nuke.Common.Tools.NuGetKeyVaultSignTool;
+using Nuke.Local.Tools.NuGetKeyVaultSignTool;
 using Nuke.Common.Tools.AzureSignTool;
 using Nuke.CodeGeneration;
 using Newtonsoft.Json;

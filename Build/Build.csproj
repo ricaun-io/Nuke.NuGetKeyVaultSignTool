@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ricaun.Nuke" Version="*-*" />
+    <PackageReference Include="ricaun.Nuke" Version="*" />
     <PackageReference Include="Nuke.Tooling.Generator" Version="8.*" />
   </ItemGroup>
 
