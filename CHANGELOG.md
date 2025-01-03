@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.0] / 2025-01-03
 ### Tests
 - Add `NuGet` with `delete`, `verify` and `sign` commands.
+- Add `DotNetNuGet` with `push`, `delete`, `verify` and `sign` commands.
 - Update namespace to `Nuke.Local.Tools` to prevent conflicts with `Nuke.Common` namespace.
 
 ## [1.0.0] / 2024-12-04
