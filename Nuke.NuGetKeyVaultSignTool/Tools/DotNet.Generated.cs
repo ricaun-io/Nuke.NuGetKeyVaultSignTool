@@ -265,6 +265,60 @@ public partial class DotNetTasks
     {
         return configurator.Invoke(DotNetNuGetSign, DotNetLogger, degreeOfParallelism, completeOnFailure);
     }
+    /// <summary>
+    ///   <p>The dotnet nuget verify command verifies a signed NuGet package.</p>
+    ///   <p>For more details, visit the <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/">official website</a>.</p>
+    /// </summary>
+    /// <remarks>
+    ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+    ///   <ul>
+    ///     <li><c>&lt;targetPath&gt;</c> via <see cref="DotNetNuGetVerifySettings.TargetPath"/></li>
+    ///     <li><c>--certificate-fingerprint</c> via <see cref="DotNetNuGetVerifySettings.CertificateFingerprint"/></li>
+    ///     <li><c>--configfile</c> via <see cref="DotNetNuGetVerifySettings.ConfigFile"/></li>
+    ///     <li><c>--verbosity</c> via <see cref="DotNetNuGetVerifySettings.Verbosity"/></li>
+    ///   </ul>
+    /// </remarks>
+    public static IReadOnlyCollection<Output> DotNetNuGetVerify(DotNetNuGetVerifySettings toolSettings = null)
+    {
+        toolSettings = toolSettings ?? new DotNetNuGetVerifySettings();
+        using var process = ProcessTasks.StartProcess(toolSettings);
+        toolSettings.ProcessExitHandler.Invoke(toolSettings, process.AssertWaitForExit());
+        return process.Output;
+    }
+    /// <summary>
+    ///   <p>The dotnet nuget verify command verifies a signed NuGet package.</p>
+    ///   <p>For more details, visit the <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/">official website</a>.</p>
+    /// </summary>
+    /// <remarks>
+    ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+    ///   <ul>
+    ///     <li><c>&lt;targetPath&gt;</c> via <see cref="DotNetNuGetVerifySettings.TargetPath"/></li>
+    ///     <li><c>--certificate-fingerprint</c> via <see cref="DotNetNuGetVerifySettings.CertificateFingerprint"/></li>
+    ///     <li><c>--configfile</c> via <see cref="DotNetNuGetVerifySettings.ConfigFile"/></li>
+    ///     <li><c>--verbosity</c> via <see cref="DotNetNuGetVerifySettings.Verbosity"/></li>
+    ///   </ul>
+    /// </remarks>
+    public static IReadOnlyCollection<Output> DotNetNuGetVerify(Configure<DotNetNuGetVerifySettings> configurator)
+    {
+        return DotNetNuGetVerify(configurator(new DotNetNuGetVerifySettings()));
+    }
+    /// <summary>
+    ///   <p>The dotnet nuget verify command verifies a signed NuGet package.</p>
+    ///   <p>For more details, visit the <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/">official website</a>.</p>
+    /// </summary>
+    /// <remarks>
+    ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+    ///   <ul>
+    ///     <li><c>&lt;targetPath&gt;</c> via <see cref="DotNetNuGetVerifySettings.TargetPath"/></li>
+    ///     <li><c>--certificate-fingerprint</c> via <see cref="DotNetNuGetVerifySettings.CertificateFingerprint"/></li>
+    ///     <li><c>--configfile</c> via <see cref="DotNetNuGetVerifySettings.ConfigFile"/></li>
+    ///     <li><c>--verbosity</c> via <see cref="DotNetNuGetVerifySettings.Verbosity"/></li>
+    ///   </ul>
+    /// </remarks>
+    public static IEnumerable<(DotNetNuGetVerifySettings Settings, IReadOnlyCollection<Output> Output)> DotNetNuGetVerify(CombinatorialConfigure<DotNetNuGetVerifySettings> configurator, int degreeOfParallelism = 1, bool completeOnFailure = false)
+    {
+        return configurator.Invoke(DotNetNuGetVerify, DotNetLogger, degreeOfParallelism, completeOnFailure);
+    }
 }
 #region DotNetNuGetPushSettings
 /// <summary>
@@ -490,6 +544,49 @@ public partial class DotNetNuGetSignSettings : ToolSettings
           .Add("--overwrite", Overwrite)
           .Add("--timestamp-hash-algorithm {value}", TimestampHashAlgorithm)
           .Add("--timestamper {value}", Timestamper)
+          .Add("--verbosity {value}", Verbosity);
+        return base.ConfigureProcessArguments(arguments);
+    }
+}
+#endregion
+#region DotNetNuGetVerifySettings
+/// <summary>
+///   Used within <see cref="DotNetTasks"/>.
+/// </summary>
+[PublicAPI]
+[ExcludeFromCodeCoverage]
+[Serializable]
+public partial class DotNetNuGetVerifySettings : ToolSettings
+{
+    /// <summary>
+    ///   Path to the DotNet executable.
+    /// </summary>
+    public override string ProcessToolPath => base.ProcessToolPath ?? DotNetTasks.DotNetPath;
+    public override Action<OutputType, string> ProcessLogger => base.ProcessLogger ?? DotNetTasks.DotNetLogger;
+    public override Action<ToolSettings, IProcess> ProcessExitHandler => base.ProcessExitHandler ?? DotNetTasks.DotNetExitHandler;
+    /// <summary>
+    ///   Path of the package to verify.
+    /// </summary>
+    public virtual string TargetPath { get; internal set; }
+    /// <summary>
+    ///   Verify that the signer certificate matches with one of the specified SHA256 fingerprints. This option can be supplied multiple times to provide multiple fingerprints.
+    /// </summary>
+    public virtual string CertificateFingerprint { get; internal set; }
+    /// <summary>
+    ///   The NuGet configuration file (nuget.config) to use.
+    /// </summary>
+    public virtual string ConfigFile { get; internal set; }
+    /// <summary>
+    ///   Sets the verbosity level of the command. Allowed values are <c>q[uiet]</c>, <c>m[inimal]</c>, <c>n[ormal]</c>, <c>d[etailed]</c>, and <c>diag[nostic]</c>.
+    /// </summary>
+    public virtual DotNetVerbosity Verbosity { get; internal set; }
+    protected override Arguments ConfigureProcessArguments(Arguments arguments)
+    {
+        arguments
+          .Add("nuget verify")
+          .Add("{value}", TargetPath)
+          .Add("--certificate-fingerprint {value}", CertificateFingerprint)
+          .Add("--configfile {value}", ConfigFile)
           .Add("--verbosity {value}", Verbosity);
         return base.ConfigureProcessArguments(arguments);
     }
@@ -1615,6 +1712,112 @@ public static partial class DotNetNuGetSignSettingsExtensions
     /// </summary>
     [Pure]
     public static T ResetVerbosity<T>(this T toolSettings) where T : DotNetNuGetSignSettings
+    {
+        toolSettings = toolSettings.NewInstance();
+        toolSettings.Verbosity = null;
+        return toolSettings;
+    }
+    #endregion
+}
+#endregion
+#region DotNetNuGetVerifySettingsExtensions
+/// <summary>
+///   Used within <see cref="DotNetTasks"/>.
+/// </summary>
+[PublicAPI]
+[ExcludeFromCodeCoverage]
+public static partial class DotNetNuGetVerifySettingsExtensions
+{
+    #region TargetPath
+    /// <summary>
+    ///   <p><em>Sets <see cref="DotNetNuGetVerifySettings.TargetPath"/></em></p>
+    ///   <p>Path of the package to verify.</p>
+    /// </summary>
+    [Pure]
+    public static T SetTargetPath<T>(this T toolSettings, string targetPath) where T : DotNetNuGetVerifySettings
+    {
+        toolSettings = toolSettings.NewInstance();
+        toolSettings.TargetPath = targetPath;
+        return toolSettings;
+    }
+    /// <summary>
+    ///   <p><em>Resets <see cref="DotNetNuGetVerifySettings.TargetPath"/></em></p>
+    ///   <p>Path of the package to verify.</p>
+    /// </summary>
+    [Pure]
+    public static T ResetTargetPath<T>(this T toolSettings) where T : DotNetNuGetVerifySettings
+    {
+        toolSettings = toolSettings.NewInstance();
+        toolSettings.TargetPath = null;
+        return toolSettings;
+    }
+    #endregion
+    #region CertificateFingerprint
+    /// <summary>
+    ///   <p><em>Sets <see cref="DotNetNuGetVerifySettings.CertificateFingerprint"/></em></p>
+    ///   <p>Verify that the signer certificate matches with one of the specified SHA256 fingerprints. This option can be supplied multiple times to provide multiple fingerprints.</p>
+    /// </summary>
+    [Pure]
+    public static T SetCertificateFingerprint<T>(this T toolSettings, string certificateFingerprint) where T : DotNetNuGetVerifySettings
+    {
+        toolSettings = toolSettings.NewInstance();
+        toolSettings.CertificateFingerprint = certificateFingerprint;
+        return toolSettings;
+    }
+    /// <summary>
+    ///   <p><em>Resets <see cref="DotNetNuGetVerifySettings.CertificateFingerprint"/></em></p>
+    ///   <p>Verify that the signer certificate matches with one of the specified SHA256 fingerprints. This option can be supplied multiple times to provide multiple fingerprints.</p>
+    /// </summary>
+    [Pure]
+    public static T ResetCertificateFingerprint<T>(this T toolSettings) where T : DotNetNuGetVerifySettings
+    {
+        toolSettings = toolSettings.NewInstance();
+        toolSettings.CertificateFingerprint = null;
+        return toolSettings;
+    }
+    #endregion
+    #region ConfigFile
+    /// <summary>
+    ///   <p><em>Sets <see cref="DotNetNuGetVerifySettings.ConfigFile"/></em></p>
+    ///   <p>The NuGet configuration file (nuget.config) to use.</p>
+    /// </summary>
+    [Pure]
+    public static T SetConfigFile<T>(this T toolSettings, string configFile) where T : DotNetNuGetVerifySettings
+    {
+        toolSettings = toolSettings.NewInstance();
+        toolSettings.ConfigFile = configFile;
+        return toolSettings;
+    }
+    /// <summary>
+    ///   <p><em>Resets <see cref="DotNetNuGetVerifySettings.ConfigFile"/></em></p>
+    ///   <p>The NuGet configuration file (nuget.config) to use.</p>
+    /// </summary>
+    [Pure]
+    public static T ResetConfigFile<T>(this T toolSettings) where T : DotNetNuGetVerifySettings
+    {
+        toolSettings = toolSettings.NewInstance();
+        toolSettings.ConfigFile = null;
+        return toolSettings;
+    }
+    #endregion
+    #region Verbosity
+    /// <summary>
+    ///   <p><em>Sets <see cref="DotNetNuGetVerifySettings.Verbosity"/></em></p>
+    ///   <p>Sets the verbosity level of the command. Allowed values are <c>q[uiet]</c>, <c>m[inimal]</c>, <c>n[ormal]</c>, <c>d[etailed]</c>, and <c>diag[nostic]</c>.</p>
+    /// </summary>
+    [Pure]
+    public static T SetVerbosity<T>(this T toolSettings, DotNetVerbosity verbosity) where T : DotNetNuGetVerifySettings
+    {
+        toolSettings = toolSettings.NewInstance();
+        toolSettings.Verbosity = verbosity;
+        return toolSettings;
+    }
+    /// <summary>
+    ///   <p><em>Resets <see cref="DotNetNuGetVerifySettings.Verbosity"/></em></p>
+    ///   <p>Sets the verbosity level of the command. Allowed values are <c>q[uiet]</c>, <c>m[inimal]</c>, <c>n[ormal]</c>, <c>d[etailed]</c>, and <c>diag[nostic]</c>.</p>
+    /// </summary>
+    [Pure]
+    public static T ResetVerbosity<T>(this T toolSettings) where T : DotNetNuGetVerifySettings
     {
         toolSettings = toolSettings.NewInstance();
         toolSettings.Verbosity = null;

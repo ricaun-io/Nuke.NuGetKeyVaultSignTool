@@ -249,6 +249,40 @@
           }
         ]
       }
+    },
+    {
+      "help": "The dotnet nuget verify command verifies a signed NuGet package.",
+      "postfix": "NuGetVerify",
+      "omitCommonProperties": true,
+      "definiteArgument": "nuget verify",
+      "settingsClass": {
+        "properties": [
+          {
+            "name": "TargetPath",
+            "type": "string",
+            "format": "{value}",
+            "help": "Path of the package to verify."
+          },
+          {
+            "name": "CertificateFingerprint",
+            "type": "string",
+            "format": "--certificate-fingerprint {value}",
+            "help": "Verify that the signer certificate matches with one of the specified SHA256 fingerprints. This option can be supplied multiple times to provide multiple fingerprints."
+          },
+          {
+            "name": "ConfigFile",
+            "type": "string",
+            "format": "--configfile {value}",
+            "help": "The NuGet configuration file (nuget.config) to use."
+          },
+          {
+            "name": "Verbosity",
+            "type": "DotNetVerbosity",
+            "format": "--verbosity {value}",
+            "help": "Sets the verbosity level of the command. Allowed values are <c>q[uiet]</c>, <c>m[inimal]</c>, <c>n[ormal]</c>, <c>d[etailed]</c>, and <c>diag[nostic]</c>."
+          }
+        ]
+      }
     }
   ],
   "commonTaskProperties": [

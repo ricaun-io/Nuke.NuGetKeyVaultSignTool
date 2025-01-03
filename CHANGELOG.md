@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `NuGet` with `delete`, `verify` and `sign` commands.
 - Add `DotNetNuGet` with `push`, `delete`, `verify` and `sign` commands.
 - Update namespace to `Nuke.Local.Tools` to prevent conflicts with `Nuke.Common` namespace.
+- Add certificated `signfile.pfx` to test `NuGet` and `DotNetNuGet`, the password is `signfile`.
 
 ## [1.0.0] / 2024-12-04
 ### Build

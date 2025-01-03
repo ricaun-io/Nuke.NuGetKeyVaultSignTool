@@ -187,7 +187,7 @@
       "settingsClass": {
         "properties": [
           {
-            "name": "Signatures",
+            "name": "TargetPath",
             "type": "string",
             "format": "-Signatures {value}",
             "help": "Path of the package to verify Signatures."

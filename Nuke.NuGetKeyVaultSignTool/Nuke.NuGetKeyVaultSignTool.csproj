@@ -10,6 +10,7 @@
     <PackageReference Include="Nuke.Tooling.Generator" Version="8.*" />
     <PackageDownload Include="AzureSignTool" Version="[6.0.0]" />
     <PackageDownload Include="NuGetKeyVaultSignTool" Version="[3.2.3]" />
+    <PackageReference Include="NuGet.CommandLine" Version="*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Files\package.nupkg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Files\signfile.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tools\NuGetKeyVaultSignTool.json">

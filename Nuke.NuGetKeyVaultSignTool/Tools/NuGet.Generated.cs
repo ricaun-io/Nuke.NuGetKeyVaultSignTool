@@ -215,7 +215,7 @@ public partial class NuGetTasks
     ///     <li><c>-ConfigFile</c> via <see cref="NuGetVerifySettings.ConfigFile"/></li>
     ///     <li><c>-ForceEnglishOutput</c> via <see cref="NuGetVerifySettings.ForceEnglishOutput"/></li>
     ///     <li><c>-NonInteractive</c> via <see cref="NuGetVerifySettings.NonInteractive"/></li>
-    ///     <li><c>-Signatures</c> via <see cref="NuGetVerifySettings.Signatures"/></li>
+    ///     <li><c>-Signatures</c> via <see cref="NuGetVerifySettings.TargetPath"/></li>
     ///     <li><c>-Verbosity</c> via <see cref="NuGetVerifySettings.Verbosity"/></li>
     ///   </ul>
     /// </remarks>
@@ -237,7 +237,7 @@ public partial class NuGetTasks
     ///     <li><c>-ConfigFile</c> via <see cref="NuGetVerifySettings.ConfigFile"/></li>
     ///     <li><c>-ForceEnglishOutput</c> via <see cref="NuGetVerifySettings.ForceEnglishOutput"/></li>
     ///     <li><c>-NonInteractive</c> via <see cref="NuGetVerifySettings.NonInteractive"/></li>
-    ///     <li><c>-Signatures</c> via <see cref="NuGetVerifySettings.Signatures"/></li>
+    ///     <li><c>-Signatures</c> via <see cref="NuGetVerifySettings.TargetPath"/></li>
     ///     <li><c>-Verbosity</c> via <see cref="NuGetVerifySettings.Verbosity"/></li>
     ///   </ul>
     /// </remarks>
@@ -256,7 +256,7 @@ public partial class NuGetTasks
     ///     <li><c>-ConfigFile</c> via <see cref="NuGetVerifySettings.ConfigFile"/></li>
     ///     <li><c>-ForceEnglishOutput</c> via <see cref="NuGetVerifySettings.ForceEnglishOutput"/></li>
     ///     <li><c>-NonInteractive</c> via <see cref="NuGetVerifySettings.NonInteractive"/></li>
-    ///     <li><c>-Signatures</c> via <see cref="NuGetVerifySettings.Signatures"/></li>
+    ///     <li><c>-Signatures</c> via <see cref="NuGetVerifySettings.TargetPath"/></li>
     ///     <li><c>-Verbosity</c> via <see cref="NuGetVerifySettings.Verbosity"/></li>
     ///   </ul>
     /// </remarks>
@@ -454,7 +454,7 @@ public partial class NuGetVerifySettings : ToolSettings
     /// <summary>
     ///   Path of the package to verify Signatures.
     /// </summary>
-    public virtual string Signatures { get; internal set; }
+    public virtual string TargetPath { get; internal set; }
     /// <summary>
     ///   Specifies one or more SHA-256 certificate fingerprints of certificates(s) which signed packages must be signed with. A certificate SHA-256 fingerprint is a SHA-256 hash of the certificate. Multiple inputs should be semicolon separated.
     /// </summary>
@@ -479,7 +479,7 @@ public partial class NuGetVerifySettings : ToolSettings
     {
         arguments
           .Add("verify")
-          .Add("-Signatures {value}", Signatures)
+          .Add("-Signatures {value}", TargetPath)
           .Add("-CertificateFingerprint {value}", CertificateFingerprint)
           .Add("-ConfigFile {value}", ConfigFile)
           .Add("-ForceEnglishOutput", ForceEnglishOutput)
@@ -1315,27 +1315,27 @@ public static partial class NuGetSignSettingsExtensions
 [ExcludeFromCodeCoverage]
 public static partial class NuGetVerifySettingsExtensions
 {
-    #region Signatures
+    #region TargetPath
     /// <summary>
-    ///   <p><em>Sets <see cref="NuGetVerifySettings.Signatures"/></em></p>
+    ///   <p><em>Sets <see cref="NuGetVerifySettings.TargetPath"/></em></p>
     ///   <p>Path of the package to verify Signatures.</p>
     /// </summary>
     [Pure]
-    public static T SetSignatures<T>(this T toolSettings, string signatures) where T : NuGetVerifySettings
+    public static T SetTargetPath<T>(this T toolSettings, string targetPath) where T : NuGetVerifySettings
     {
         toolSettings = toolSettings.NewInstance();
-        toolSettings.Signatures = signatures;
+        toolSettings.TargetPath = targetPath;
         return toolSettings;
     }
     /// <summary>
-    ///   <p><em>Resets <see cref="NuGetVerifySettings.Signatures"/></em></p>
+    ///   <p><em>Resets <see cref="NuGetVerifySettings.TargetPath"/></em></p>
     ///   <p>Path of the package to verify Signatures.</p>
     /// </summary>
     [Pure]
-    public static T ResetSignatures<T>(this T toolSettings) where T : NuGetVerifySettings
+    public static T ResetTargetPath<T>(this T toolSettings) where T : NuGetVerifySettings
     {
         toolSettings = toolSettings.NewInstance();
-        toolSettings.Signatures = null;
+        toolSettings.TargetPath = null;
         return toolSettings;
     }
     #endregion
