@@ -18,7 +18,7 @@ namespace Nuke.NuGetKeyVaultSignTool
                 Console.WriteLine(output);
         }
 
-        [TestCase("Files/package.nupkg")]
+        [TestCase("Files/packageNone.nupkg")]
         public void SignPackage(string fileName)
         {
             // Copy File to temp folder
@@ -70,7 +70,7 @@ namespace Nuke.NuGetKeyVaultSignTool
                 Console.WriteLine(output);
         }
 
-        [TestCase("Files/package.nupkg")]
+        [TestCase("Files/packageNone.nupkg")]
         public void SignPackage(string fileName)
         {
             // Copy File to temp folder
